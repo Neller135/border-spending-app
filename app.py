@@ -79,11 +79,39 @@ SPENDING = {"australia": au_spending, "global": gl_spending}
 
 # ── Header ────────────────────────────────────────────────────────────────────
 st.title("🌏 The Same Money")
+st.subheader("What Australia's border protection budget could do instead")
 st.markdown(
     "An interactive tool comparing border enforcement spending to the cost of "
     "humane alternatives — resettlement, and addressing the root causes of displacement."
 )
 st.divider()
+with st.expander("About this data"):
+    st.markdown("""
+**Border spending figure**
+
+The Australia figure (~$2B) covers Australian Border Force operations, on-water response,
+aerial surveillance, and border management, as reported in the
+[2023-24 Home Affairs Portfolio Budget Statement](https://www.homeaffairs.gov.au/reports-and-publications/reports/budgets/portfolio-budget-2023-24).
+It does not include offshore processing (~$580M extra) or the broader Home Affairs portfolio.
+Adding offshore processing brings the total to approximately **$2.6B**.
+
+**Alternative cost figures**
+
+All figures for resettlement, education, healthcare, and other interventions are estimates
+based on published data from UNHCR, the World Bank, WHO, ILO, and GiveDirectly.
+Costs vary significantly by country, program design, and year.
+
+**Country data**
+
+Population, poverty, and development indicators are loaded live from the World Bank API.
+Displacement figures are from UNHCR Global Trends 2023.
+
+**Purpose**
+
+This tool is intended for educational and advocacy purposes, to make the opportunity cost
+of border spending visible to a wider audience.
+    """)
+
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
