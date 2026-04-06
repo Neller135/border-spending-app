@@ -78,13 +78,13 @@ with st.spinner("Loading latest data from World Bank..."):
 SPENDING = {"australia": au_spending, "global": gl_spending}
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("🌏 The Same Money")
+st.title("The Same Money")
 st.subheader("What Australia's border protection budget could do instead")
 st.markdown(
     "An interactive tool comparing border enforcement spending to the cost of "
     "humane alternatives — resettlement, and addressing the root causes of displacement."
 )
-st.divider()
+
 with st.expander("About this data"):
     st.markdown("""
 **Border spending figure**
@@ -112,6 +112,7 @@ This tool is intended for educational and advocacy purposes, to make the opportu
 of border spending visible to a wider audience.
     """)
 
+st.divider()
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
@@ -271,12 +272,13 @@ with tab2:
     push_cols = st.columns(2)
     for i, (key, item) in enumerate(PUSH_FACTOR_COSTS.items()):
         n = int(redirected / item["cost_aud"])
+        unit = item["unit"] if item["unit"].endswith("ren") else item["unit"] + "s"
         with push_cols[i % 2]:
             st.markdown(f"""
             <div class="comparison-card">
                 <strong>{item['label']}</strong><br/>
                 <span style="font-size:1.8rem;font-weight:700;color:#2e7d32">
-                    {fmt_number(n)} {item['unit']}s
+                    {fmt_number(n)} {unit}
                 </span><br/>
                 <span style="font-size:0.85rem;color:#555">
                     at {fmt_aud(item['cost_aud'])} per {item['unit']}
@@ -286,7 +288,7 @@ with tab2:
             </div>""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TAB 3 — Country Profiles (new)
+# TAB 3 — Country Profiles
 # ─────────────────────────────────────────────────────────────────────────────
 with tab3:
     st.subheader("Source country profiles")
@@ -313,7 +315,6 @@ with tab3:
     st.divider()
     st.subheader(f"What could {fmt_aud(redirected)} do in {country['country']}?")
 
-    # People in poverty
     if country["in_poverty"]:
         poverty_transfer_cost = country["in_poverty"] * PUSH_FACTOR_COSTS["cash_transfer_poverty"]["cost_aud"]
         pct_coverable = min(100, redirected / poverty_transfer_cost * 100)
@@ -325,7 +326,6 @@ with tab3:
             ({fmt_number(int(redirected / PUSH_FACTOR_COSTS['cash_transfer_poverty']['cost_aud']))} people).
         </div>""", unsafe_allow_html=True)
 
-    # Education
     edu_n = int(redirected / PUSH_FACTOR_COSTS["primary_education"]["cost_aud"])
     st.markdown(f"""
     <div class="country-card">
@@ -335,7 +335,6 @@ with tab3:
         at {fmt_aud(PUSH_FACTOR_COSTS['primary_education']['cost_aud'])} per child.
     </div>""", unsafe_allow_html=True)
 
-    # Healthcare
     health_n = int(redirected / PUSH_FACTOR_COSTS["basic_healthcare"]["cost_aud"])
     st.markdown(f"""
     <div class="country-card">
@@ -345,7 +344,6 @@ with tab3:
         for one year.
     </div>""", unsafe_allow_html=True)
 
-    # Clean water
     water_n = int(redirected / PUSH_FACTOR_COSTS["clean_water_access"]["cost_aud"])
     st.markdown(f"""
     <div class="country-card">
@@ -368,13 +366,13 @@ with tab4:
 
     cost_comparison = {
         "Offshore detention (AU, per person/yr)": RESETTLEMENT_COSTS["offshore_processing_per_person"]["cost_aud"],
-        "Full refugee resettlement":              RESETTLEMENT_COSTS["refugee_resettlement"]["cost_aud"],
-        "Community sponsorship":                  RESETTLEMENT_COSTS["community_sponsorship"]["cost_aud"],
-        "Skills training":                        PUSH_FACTOR_COSTS["skills_training"]["cost_aud"],
-        "Cash transfer (poverty)":                PUSH_FACTOR_COSTS["cash_transfer_poverty"]["cost_aud"],
-        "Primary education (1 yr)":               PUSH_FACTOR_COSTS["primary_education"]["cost_aud"],
-        "Basic healthcare (1 yr)":                PUSH_FACTOR_COSTS["basic_healthcare"]["cost_aud"],
-        "Clean water access":                     PUSH_FACTOR_COSTS["clean_water_access"]["cost_aud"],
+        "Full refugee resettlement — estimated":  RESETTLEMENT_COSTS["refugee_resettlement"]["cost_aud"],
+        "Community sponsorship — estimated":      RESETTLEMENT_COSTS["community_sponsorship"]["cost_aud"],
+        "Skills training — estimated":            PUSH_FACTOR_COSTS["skills_training"]["cost_aud"],
+        "Cash transfer (poverty) — estimated":    PUSH_FACTOR_COSTS["cash_transfer_poverty"]["cost_aud"],
+        "Primary education (1 yr) — estimated":   PUSH_FACTOR_COSTS["primary_education"]["cost_aud"],
+        "Basic healthcare (1 yr) — estimated":    PUSH_FACTOR_COSTS["basic_healthcare"]["cost_aud"],
+        "Clean water access — estimated":         PUSH_FACTOR_COSTS["clean_water_access"]["cost_aud"],
     }
 
     df_costs = pd.DataFrame({
