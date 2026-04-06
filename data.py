@@ -54,7 +54,7 @@ PUSH_FACTOR_COSTS = {
     "primary_education": {
         "label": "Primary education (1 year) — estimated",
         "cost_aud": 150,
-        "unit": "children",
+        "unit": "child",
         "description": "Estimated cost per child per year for primary education in low-income countries. World Bank figures range from $50–$300+ USD depending on country and program quality.",
         "source": "https://data.worldbank.org/indicator/SE.XPD.PRIM.PC.ZS",
         "estimated": True,
