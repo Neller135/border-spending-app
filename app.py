@@ -11,7 +11,7 @@ from api_client import (
 )
 
 st.set_page_config(
-    page_title="What Could Border Spending Buy?",
+    page_title="The Same Money",
     page_icon="🌏",
     layout="wide",
 )
@@ -78,7 +78,7 @@ with st.spinner("Loading latest data from World Bank..."):
 SPENDING = {"australia": au_spending, "global": gl_spending}
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("🌏 What Could Border Spending Buy?")
+st.title("🌏 The Same Money")
 st.markdown(
     "An interactive tool comparing border enforcement spending to the cost of "
     "humane alternatives — resettlement, and addressing the root causes of displacement."
