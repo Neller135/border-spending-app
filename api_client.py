@@ -98,9 +98,9 @@ def get_au_border_spending_aud() -> dict:
     Not available via public API — curated figure.
     """
     return {
-        "annual_aud": 4_200_000_000,
+        "annual_aud": 2_000_000_000,
         "label": "Australia",
-        "description": "Home Affairs portfolio (ABF, detention, offshore processing)",
+        "description": "Border enforcement and management (ABF operations, on-water response, aerial surveillance)",
         "source": "https://www.homeaffairs.gov.au/about-us/corporate/budget",
         "year": "2023-24",
     }
