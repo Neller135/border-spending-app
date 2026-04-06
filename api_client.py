@@ -10,7 +10,7 @@ WORLD_BANK_BASE = "https://api.worldbank.org/v2"
 
 SOURCE_COUNTRIES = {
     "AFG": "Afghanistan",
-    "SYR": "Syrian Arab Republic",
+    "SYR": "Syrian",
     "VEN": "Venezuela",
     "SSD": "South Sudan",
     "MMR": "Myanmar",
